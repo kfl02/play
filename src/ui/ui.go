@@ -604,7 +604,7 @@ func (ui *UI) configFileOptionsTreeView() {
 // Function for configuring OutputView TextView
 func (ui *UI) configOutputView() {
 	ui.OutputView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyF1 {
+		if (event.Key() == tcell.KeyF1) || (event.Key() == tcell.KeyEsc) {
 			if ui.ActiveFlex == &ui.Flex {
 				ui.App.SetRoot(ui.Flex, true)
 				ui.App.SetFocus(*ui.ActiveInput)
