@@ -53,25 +53,23 @@ To exit the application printing the input expression to stdout, use `Ctrl+S`.
 
 ## Key bindings
 
-| Component       | Key           | Description |
-|-----------------|---------------|-------------|
-| Any                  | `Ctrl+C`      | Exit application |
+| Component            | Key           | Description                                           |
+|----------------------|---------------|-------------------------------------------------------|
+| Any                  | `Ctrl+C`      | Exit application                                      |
 | Any                  | `Ctrl+S`      | Exit application and print input expression to stdout |
-| Command Options      | `Tab`         | Move focus to positional arguments  |
-| Command Options      | `Shift+Tab`   | Move focus to file picker |
-| Command Options      | `Enter`       | Move focus to output |
-| Positional Arguments | `Tab`         | Move focus to file picker |
-| Positional Arguments | `Shift+Tab`   | Move focus to command options |
-| Positional Arguments | `Enter`       | Move focus to output |
-| Positional Arguments | `Ctrl+O`      | Open wide editor |
-| Wide Editor          | `Esc`         | Close wide editor |
-| Wide Editor          | `Ctrl+O`      | Close wide editor |
-| Wide Editor          | `Ctrl+Enter`  | Enter newline |
-| Wide Editor          | `Enter`       | Move focus to output |
-| File picker          | `Tab`         | Move focus to command options |
-| File picker          | `Shift+Tab`   | Move focus to positional arguments options |
-| File picker          | `Ctrl+O`      | Open selected file/Close selected file | 
-| Output               | `Esc`         | Move focus to previous component |
+| Command Options      | `Tab`         | Move focus to positional arguments                    |
+| Command Options      | `Shift+Tab`   | Move focus to file picker                             |
+| Command Options      | `F1`          | Move focus to output                                  |
+| Positional Arguments | `Tab`         | Move focus to file picker                             |
+| Positional Arguments | `Shift+Tab`   | Move focus to command options                         |
+| Positional Arguments | `F1`          | Move focus to output                                  |
+| Positional Arguments | `Enter`       | Open wide editor                                      |
+| Wide Editor          | `Esc`         | Close wide editor                                     |
+| Wide Editor          | `F1`          | Move focus to output                                  |
+| File picker          | `Tab`         | Move focus to command options                         |
+| File picker          | `Shift+Tab`   | Move focus to positional arguments options            |
+| File picker          | `F1`          | Open selected file/Close selected file                |
+| Output               | `Esc`         | Move focus to previous component                      |
 
 # Credits
 

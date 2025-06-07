@@ -357,11 +357,9 @@ func (ui *UI) configOptionsInput() {
 		ui.OptionsInput.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 			key := event.Key()
 			switch key {
-			case tcell.KeyTab:
+			case tcell.KeyTab, tcell.KeyBacktab:
 				ui.App.SetFocus(ui.ArgumentsInput)
-			case tcell.KeyBacktab:
-				ui.App.SetFocus(ui.ArgumentsInput)
-			case tcell.KeyEnter:
+			case tcell.KeyF1:
 				ui.ActiveInput = &ui.OptionsInput
 				ui.App.SetFocus(ui.OutputView)
 			case tcell.KeyRune:
@@ -377,7 +375,7 @@ func (ui *UI) configOptionsInput() {
 				ui.App.SetFocus(ui.ArgumentsInput)
 			case tcell.KeyBacktab:
 				ui.App.SetFocus(ui.FileOptionsTreeView)
-			case tcell.KeyEnter:
+			case tcell.KeyF1:
 				ui.ActiveInput = &ui.OptionsInput
 				ui.App.SetFocus(ui.OutputView)
 			case tcell.KeyRune:
@@ -401,20 +399,12 @@ func (ui *UI) configArgumentsInput() {
 		ui.ArgumentsInput.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 			key := event.Key()
 			switch key {
-			case tcell.KeyRune:
+			case tcell.KeyRune, tcell.KeyDelete, tcell.KeyBackspace2:
 				ui.OutputView.ScrollToBeginning()
 				ui.resizeChildFlexIfNeeded()
-			case tcell.KeyDelete:
-				ui.OutputView.ScrollToBeginning()
-				ui.resizeChildFlexIfNeeded()
-			case tcell.KeyBackspace2:
-				ui.OutputView.ScrollToBeginning()
-				ui.resizeChildFlexIfNeeded()
-			case tcell.KeyTab:
+			case tcell.KeyTab, tcell.KeyBacktab:
 				ui.App.SetFocus(ui.OptionsInput)
-			case tcell.KeyBacktab:
-				ui.App.SetFocus(ui.OptionsInput)
-			case tcell.KeyEnter:
+			case tcell.KeyF1:
 				ui.ActiveInput = &ui.ArgumentsInput
 				ui.App.SetFocus(ui.OutputView)
 			case tcell.KeyCtrlSpace:
@@ -425,7 +415,7 @@ func (ui *UI) configArgumentsInput() {
 					ui.OpeningQuoteText.SetText("'")
 					ui.ClosingQuoteText.SetText("'")
 				}
-			case tcell.KeyCtrlO:
+			case tcell.KeyEnter:
 				ui.ArgumentsInputWide.SetText(ui.ArgumentsInput.GetText(), true)
 				ui.ActiveFlex = &ui.ArgumentsInputWideFlex
 				ui.App.SetRoot(ui.ArgumentsInputWideFlex, true).
@@ -437,20 +427,14 @@ func (ui *UI) configArgumentsInput() {
 		ui.ArgumentsInput.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 			key := event.Key()
 			switch key {
-			case tcell.KeyRune:
-				ui.OutputView.ScrollToBeginning()
-				ui.resizeChildFlexIfNeeded()
-			case tcell.KeyDelete:
-				ui.OutputView.ScrollToBeginning()
-				ui.resizeChildFlexIfNeeded()
-			case tcell.KeyBackspace2:
+			case tcell.KeyRune, tcell.KeyDelete, tcell.KeyBackspace2:
 				ui.OutputView.ScrollToBeginning()
 				ui.resizeChildFlexIfNeeded()
 			case tcell.KeyTab:
 				ui.App.SetFocus(ui.FileOptionsTreeView)
 			case tcell.KeyBacktab:
 				ui.App.SetFocus(ui.OptionsInput)
-			case tcell.KeyEnter:
+			case tcell.KeyF1:
 				ui.ActiveInput = &ui.ArgumentsInput
 				ui.App.SetFocus(ui.OutputView)
 			case tcell.KeyCtrlSpace:
@@ -461,7 +445,7 @@ func (ui *UI) configArgumentsInput() {
 					ui.OpeningQuoteText.SetText("'")
 					ui.ClosingQuoteText.SetText("'")
 				}
-			case tcell.KeyCtrlO:
+			case tcell.KeyEnter:
 				ui.ArgumentsInputWide.SetText(ui.ArgumentsInput.GetText(), true)
 				ui.ActiveFlex = &ui.ArgumentsInputWideFlex
 				ui.App.SetRoot(ui.ArgumentsInputWideFlex, true).
@@ -488,19 +472,13 @@ func (ui *UI) configArgumentsInputWide() {
 			return tcell.NewEventKey(tcell.KeyEnter, 10, 0)
 		}
 		switch key {
-		case tcell.KeyCtrlO:
-			ui.ActiveFlex = &ui.Flex
-			ui.App.SetRoot(ui.Flex, true).
-				SetFocus(ui.ArgumentsInput)
-			ui.ArgumentsInput.SetText(ui.ArgumentsInputWide.GetText())
-			ui.resizeChildFlexIfNeeded()
 		case tcell.KeyEsc:
 			ui.ActiveFlex = &ui.Flex
 			ui.App.SetRoot(ui.Flex, true).
 				SetFocus(ui.ArgumentsInput)
 			ui.ArgumentsInput.SetText(ui.ArgumentsInputWide.GetText())
 			ui.resizeChildFlexIfNeeded()
-		case tcell.KeyEnter:
+		case tcell.KeyF1:
 			ui.App.SetFocus(ui.OutputView)
 			return nil
 		}
@@ -537,7 +515,7 @@ func (ui *UI) configFileOptionsInput() {
 			ui.App.SetFocus(ui.OptionsInput)
 		case tcell.KeyBacktab:
 			ui.App.SetFocus(ui.ArgumentsInput)
-		case tcell.KeyEnter:
+		case tcell.KeyF1:
 			ui.App.SetFocus(ui.OutputView)
 		case tcell.KeyDown:
 			ui.App.SetFocus(ui.FileOptionsTreeView)
@@ -594,14 +572,12 @@ func (ui *UI) configFileOptionsTreeView() {
 	ui.FileOptionsTreeView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		key := event.Key()
 		switch key {
-		case tcell.KeyEsc:
-			ui.App.SetFocus(ui.ArgumentsInput)
-		case tcell.KeyBacktab:
+		case tcell.KeyEsc, tcell.KeyBacktab:
 			ui.App.SetFocus(ui.ArgumentsInput)
 		case tcell.KeyTab:
 			ui.App.SetFocus(ui.OptionsInput)
 
-		case tcell.KeyCtrlO:
+		case tcell.KeyF1:
 			if ui.FileOptionsTreeView.GetCurrentNode() == ui.FileOptionsTreeView.GetRoot() {
 				return event
 			}
@@ -628,7 +604,7 @@ func (ui *UI) configFileOptionsTreeView() {
 // Function for configuring OutputView TextView
 func (ui *UI) configOutputView() {
 	ui.OutputView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyEsc {
+		if event.Key() == tcell.KeyF1 {
 			if ui.ActiveFlex == &ui.Flex {
 				ui.App.SetRoot(ui.Flex, true)
 				ui.App.SetFocus(*ui.ActiveInput)
@@ -651,10 +627,7 @@ func (ui *UI) configFileView() {
 	ui.FileView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		key := event.Key()
 		switch key {
-		case tcell.KeyCtrlO:
-			ui.App.SetRoot(ui.Flex, true).
-				SetFocus(ui.FileOptionsTreeView)
-		case tcell.KeyEsc:
+		case tcell.KeyF1, tcell.KeyEsc:
 			ui.App.SetRoot(ui.Flex, true).
 				SetFocus(ui.FileOptionsTreeView)
 		}
